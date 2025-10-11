@@ -28,7 +28,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: nextbeer
-    restart: on-failure
+    restart: always
     depends_on:
       mysql:
         condition: service_healthy
