@@ -1,0 +1,304 @@
+/* Hero Section */
+.hero-section {
+    padding: 4rem 2rem 2rem 2rem; /* Restored proper padding */
+    text-align: center;
+    position: relative;
+}
+  
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+  
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    /* OCEAN DEPTHS GRADIENT - Deep & Elegant */
+    background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 15%, #3b82f6 25%, #ffffff 45%, #dbeafe 70%, #bfdbfe 85%, #1e3c72 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Enhanced shadow for ocean background */
+    text-shadow: 0 8px 16px rgba(0, 0, 0, 0.7), 0 4px 8px rgba(6, 182, 212, 0.4);
+    /* Ocean glow effect */
+    filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.2)) drop-shadow(0 0 40px rgba(59, 130, 246, 0.15));
+}
+  
+.hero-subtitle {
+    font-size: 1.25rem;
+    /* OCEAN DEPTHS SUBTITLE - Cool gradient */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(219, 234, 254, 0.9) 50%, rgba(191, 219, 254, 0.85) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    /* Enhanced readability for ocean background */
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(6, 182, 212, 0.2);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+  
+  /* Hero CTA Section */
+.hero-cta {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+  /* Premium Hero Menu Button */
+.hero-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    min-width: 200px;
+    justify-content: center;
+}
+  
+  /* Button hover effects */
+.hero-menu-button:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+  
+  /* Button active state */
+.hero-menu-button:active {
+    transform: translateY(0) scale(1.02);
+}
+  
+  /* Button icons */
+.hero-menu-button .button-icon {
+    transition: var(--transition);
+}
+  
+.hero-menu-button .button-arrow {
+    transition: var(--transition);
+}
+  
+.hero-menu-button:hover .button-arrow {
+    transform: translateX(4px);
+}
+  
+.hero-menu-button:hover .button-icon {
+    transform: rotate(15deg);
+}
+  
+  /* Button shimmer effect */
+.hero-menu-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+  
+.hero-menu-button:hover::before {
+    left: 100%;
+}
+  
+  /* Mobile responsive button */
+@media (max-width: 640px) {
+    .hero-menu-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-width: 180px;
+    gap: 0.5rem;
+    /* MOBILE FIX: More visible button */
+    background: rgba(255, 255, 255, 0.25) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+    
+.hero-menu-button:hover {
+    background: rgba(255, 255, 255, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+}
+    
+.hero-menu-button .button-icon,
+.hero-menu-button .button-arrow {
+    width: 18px;
+    height: 18px;
+}
+    
+    /* PREMIUM MOBILE OPTIMIZATIONS */
+.hero-section {
+    padding: 5rem 1rem 1.5rem 1rem; /* More top padding for navbar clearance */
+}
+    
+.hero-title {
+    font-size: clamp(2.5rem, 9vw, 3.5rem); /* Bigger mobile sizing */
+    margin-bottom: 1rem; /* More spacing */
+    font-weight: 900; /* Bolder weight */
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    /* MOBILE: Clean white text - No blur */
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    /* MOBILE: Minimal shadow */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    /* MOBILE: No filter blur */
+    filter: none !important;
+}
+    
+.hero-subtitle {
+    font-size: 1.25rem; /* Bigger on mobile */
+    margin-bottom: 2rem; /* More spacing */
+    line-height: 1.6;
+    font-weight: 500; /* Medium weight */
+    letter-spacing: 0.02em;
+    /* MOBILE: Clean light blue text - No blur */
+    color: rgba(255, 255, 255, 0.9) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    /* MOBILE: Very light shadow */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+    /* MOBILE: No filter blur */
+    filter: none !important;
+}
+    
+.hero-cta {
+    margin-top: 1.5rem; /* Reduced spacing */
+}
+    
+.campaigns-section {
+    padding: 1rem 1rem 1rem 1rem; /* Reduced bottom padding */
+}
+    
+.section-title {
+    font-size: clamp(2rem, 7vw, 3rem); /* Bigger mobile sizing */
+    margin-bottom: 1rem; /* More spacing */
+    font-weight: 800; /* Bolder weight */
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    /* MOBILE: Clean white text - No blur */
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    /* MOBILE: Light shadow */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    /* MOBILE: No filter blur */
+    filter: none !important;
+}
+    
+.section-subtitle {
+    font-size: 1.125rem; /* Bigger on mobile */
+    line-height: 1.5;
+    font-weight: 400; /* Normal weight */
+    letter-spacing: 0.01em;
+    /* MOBILE: Clean light text - No blur */
+    color: rgba(255, 255, 255, 0.85) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    /* MOBILE: Very light shadow */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    /* MOBILE: No filter blur */
+    filter: none !important;
+}
+    
+.section-header {
+    margin-bottom: 1rem; /* Further reduced mobile spacing */
+    }
+}
+  
+.menus-section {
+    padding: 2rem 2rem 4rem 2rem; /* Reduced top padding, keep bottom */
+    position: relative;
+    z-index: 10; /* Ensure sections are visible */
+    background: transparent; /* No background conflicts */
+}
+  
+.section-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+  
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Desktop Enhancement - Better visibility */
+@media (min-width: 1025px) {
+    .section-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 20%, #dbeafe 40%, #bfdbfe 60%, #93c5fd 80%, #60a5fa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(255, 255, 255, 0.2);
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    }
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(219, 234, 254, 0.88) 40%, rgba(191, 219, 254, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(6, 182, 212, 0.15);
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+}
+  
+  
+  /* Modern Campaign Card */
+.campaign-card-modern {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    overflow: hidden;
+}
+  
+  /* Mobile compact title */
+@media (max-width: 640px) {
+    .campaign-title {
+      font-size: 1.25rem; /* Compact title on mobile */
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+}
+  

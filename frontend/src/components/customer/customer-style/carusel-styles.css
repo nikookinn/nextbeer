@@ -1,0 +1,480 @@
+
+
+  
+/* ========================================
+   PREMIUM SWIPER 3D COVERFLOW CAROUSEL
+   ======================================== */
+
+/* Swiper 3D Carousel Container - FIXED: Better centering */
+.swiper-3d-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1400px; /* Wider container for better centering */
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center; /* Center the swiper */
+  align-items: center;
+}
+
+/* Main Swiper Container - FIXED: Better 3D centering */
+.campaigns-swiper-3d {
+  width: 100%;
+  max-width: 1200px; /* Constrain width for better centering */
+  height: 600px; /* Big height for premium feel */
+  padding: 50px 0;
+  overflow: visible;
+  margin: 0 auto; /* Center the swiper itself */
+  /* Enhanced 3D perspective */
+  perspective: 1200px;
+  perspective-origin: center center;
+  /* Mobile performance optimizations */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Swiper Slide - Auto width for proper centering */
+.campaign-slide-swiper {
+  width: 350px; /* Fixed width for desktop */
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Responsive slide widths */
+@media (max-width: 640px) {
+  .campaign-slide-swiper {
+    width: 300px; /* Mobile width */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .campaign-slide-swiper {
+    width: 320px; /* Tablet width */
+  }
+}
+
+@media (min-width: 1440px) {
+  .campaign-slide-swiper {
+    width: 380px; /* Large desktop width */
+  }
+}
+
+/* Campaign Card */
+.campaign-card-swiper {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Hover effects disabled for better touch experience */
+
+/* Image Container */
+.campaign-image-container-swiper {
+  position: relative;
+  height: 70%;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+}
+
+/* Enhanced Image Loading System */
+.campaign-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Loading Skeleton */
+.campaign-image-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Shimmer Animation */
+.skeleton-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.2) 40%,
+    rgba(255, 255, 255, 0.1) 60%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Pulse Content */
+.skeleton-pulse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.skeleton-icon {
+  font-size: 2rem;
+  opacity: 0.7;
+}
+
+.skeleton-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Campaign Image */
+.campaign-image-swiper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  z-index: 2;
+}
+
+/* Loading State */
+.campaign-image-swiper.loading {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+/* Loaded State */
+.campaign-image-swiper.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Image scale effects disabled for better touch experience */
+
+/* Image Overlay */
+.campaign-overlay-swiper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(
+    transparent 0%, 
+    rgba(0, 0, 0, 0.3) 30%,
+    rgba(0, 0, 0, 0.7) 70%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+/* Content Area */
+.campaign-content-swiper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  color: white;
+  z-index: 10;
+}
+
+/* Title */
+.campaign-title-swiper {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, 
+    #ffffff 0%, 
+    #f8fafc 20%, 
+    #e2e8f0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Description */
+.campaign-description-swiper {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Hide Play/Pause Button */
+.swiper-play-btn {
+  display: none; /* Hide play/pause button */
+}
+
+/* Hide Navigation Buttons */
+.campaigns-swiper-3d .swiper-button-next,
+.campaigns-swiper-3d .swiper-button-prev {
+  display: none; /* Hide navigation arrows */
+}
+
+/* Swiper Pagination Override */
+.campaigns-swiper-3d .swiper-pagination {
+  bottom: 20px;
+}
+
+.campaigns-swiper-3d .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.campaigns-swiper-3d .swiper-pagination-bullet-active {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.3);
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile Responsive - Optimized Compact Cards */
+@media (max-width: 640px) {
+  .swiper-3d-carousel {
+    padding: 1rem 0.5rem;
+  }
+  
+  .campaigns-swiper-3d {
+    height: 500px; /* Reduced container height for mobile */
+    padding: 30px 0;
+    /* Enhanced mobile performance */
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Mobile Image Loading Optimizations */
+  .campaign-image-skeleton {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.15) 0%, 
+      rgba(255, 255, 255, 0.08) 100%
+    );
+  }
+
+  .skeleton-shimmer {
+    animation-duration: 1.5s; /* Faster shimmer on mobile */
+  }
+
+  .skeleton-icon {
+    font-size: 1.5rem; /* Smaller icon on mobile */
+  }
+
+  .skeleton-text {
+    font-size: 0.75rem; /* Smaller text on mobile */
+  }
+  
+  .campaign-slide-swiper {
+    height: 400px; /* Reduced card height for mobile */
+  }
+  
+  /* Full image area on mobile - text overlays */
+  .campaign-image-container-swiper {
+    height: 100%; /* Full height - text will overlay */
+    position: relative;
+  }
+  
+  .campaign-image-swiper {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center; /* Perfect center alignment */
+  }
+  
+  .campaign-content-swiper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    /* Lighter gradient from top - more transparent */
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 0, 0, 0.1) 20%,
+      rgba(0, 0, 0, 0.3) 40%,
+      rgba(0, 0, 0, 0.6) 70%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+    backdrop-filter: blur(8px);
+    z-index: 2;
+  }
+  
+  .campaign-title-swiper {
+    font-size: 1.25rem; /* Slightly bigger for overlay */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); /* Lighter shadow */
+  }
+  
+  .campaign-description-swiper {
+    font-size: 0.875rem; /* Readable size for overlay */
+    -webkit-line-clamp: 2; /* Allow 2 lines */
+    line-clamp: 2;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Lighter shadow */
+  }
+  
+  /* Remove overlay - text has its own background */
+  .campaign-overlay-swiper {
+    display: none; /* Hide overlay since text overlays directly */
+  }
+  
+  /* Navigation buttons are hidden globally */
+}
+
+/* Tablet Responsive */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .campaigns-swiper-3d {
+    height: 580px; /* Bigger on tablet too */
+  }
+  
+  .campaign-slide-swiper {
+    height: 480px; /* Taller cards on tablet */
+  }
+  
+  .campaign-image-container-swiper {
+    height: 75%; /* More space for image on tablet */
+  }
+  
+  .campaign-title-swiper {
+    font-size: 1.5rem; /* Bigger title on tablet */
+  }
+  
+  .campaign-description-swiper {
+    font-size: 1rem; /* Bigger description on tablet */
+  }
+}
+
+/* Large Desktop - FIXED: Better centering and 3D effects */
+@media (min-width: 1440px) {
+  .swiper-3d-carousel {
+    max-width: 1600px; /* Wider container for large screens */
+    padding: 3rem 2rem; /* More padding for better spacing */
+  }
+  
+  .campaigns-swiper-3d {
+    height: 650px;
+    max-width: 1400px; /* Wider swiper for large screens */
+    /* Enhanced 3D perspective for large screens */
+    perspective: 1500px;
+    perspective-origin: center center;
+  }
+  
+  .campaign-slide-swiper {
+    width: 380px; /* Larger slides for big screens */
+    height: 550px;
+  }
+  
+  .campaign-title-swiper {
+    font-size: 1.75rem;
+  }
+  
+  .campaign-description-swiper {
+    font-size: 1rem;
+  }
+  
+  .swiper-play-btn {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .campaigns-swiper-3d .swiper-button-next,
+  .campaigns-swiper-3d .swiper-button-prev {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Ultra-Wide Screens - ADDED: Perfect centering for very large screens */
+@media (min-width: 1920px) {
+  .swiper-3d-carousel {
+    max-width: 1800px; /* Even wider for ultra-wide screens */
+    padding: 4rem 3rem;
+  }
+  
+  .campaigns-swiper-3d {
+    max-width: 1600px; /* Maximum width for ultra-wide */
+    perspective: 1800px; /* Enhanced 3D perspective */
+  }
+  
+  .campaign-slide-swiper {
+    width: 400px; /* Maximum slide width */
+  }
+}
+
+/* Performance Optimizations */
+.customer-app * {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

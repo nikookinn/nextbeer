@@ -1,0 +1,217 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styles are now handled in App.tsx GlobalStyles to override CssBaseline */
+
+/* Mobile AppBar fixes */
+@media (max-width: 600px) {
+  .MuiAppBar-root {
+    height: 56px !important;
+    min-height: 56px !important;
+  }
+  
+  .MuiToolbar-root {
+    min-height: 56px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  
+  .MuiAppBar-root .MuiIconButton-root {
+    padding: 8px !important;
+  }
+}
+
+/* Ensure proper color inheritance for icons */
+.MuiAppBar-root .MuiIconButton-root svg {
+  transition: color 0.2s ease !important;
+}
+
+/* Fix for mobile drawer overlay */
+@media (max-width: 900px) {
+  .MuiDrawer-modal .MuiBackdrop-root {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+}
+
+/* TEMIZ VE BASİT MENU CARD SİSTEMİ */
+.menu-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 20px;
+  justify-content: start;
+  width: 100%;
+}
+
+/* Mobil: Tek kolon */
+@media (max-width: 768px) {
+  .menu-cards-grid {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  /* Mobilde card'lar responsive olsun */
+  .menu-cards-grid .MuiCard-root {
+    width: 100% !important;
+    max-width: 350px !important;
+    height: 280px !important;
+  }
+}
+
+/* Tablet: 2 kolon */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .menu-cards-grid {
+    grid-template-columns: repeat(2, 300px);
+    justify-content: center;
+  }
+}
+
+/* Performance Optimizations */
+.menu-cards-grid {
+  will-change: transform !important;
+}
+
+/* CAMPAIGN CARD SİSTEMİ - MENU İLE AYNI */
+.campaign-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 20px;
+  justify-content: start;
+  width: 100%;
+}
+
+/* Mobil: Tek kolon */
+@media (max-width: 768px) {
+  .campaign-cards-grid {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px; /* Extra margin for mobile scrolling */
+    touch-action: pan-y; /* Allow vertical scrolling */
+  }
+  
+  /* Mobilde card'lar responsive olsun */
+  .campaign-cards-grid .MuiCard-root {
+    width: 100% !important;
+    max-width: 350px !important;
+    height: 280px !important;
+    margin-bottom: 8px; /* Additional spacing between cards */
+    touch-action: pan-y; /* Allow vertical scrolling on cards */
+  }
+}
+
+/* Tablet: 2 kolon */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .campaign-cards-grid {
+    grid-template-columns: repeat(2, 300px);
+    justify-content: center;
+  }
+}
+
+/* Performance Optimizations */
+.campaign-cards-grid {
+  will-change: transform !important;
+}
+
+.MuiCard-root {
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+}
+
+/* Touch-friendly minimum sizes */
+@media (max-width: 600px) {
+  .MuiIconButton-root {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* ITEM TAG VERTICAL TABLE SİSTEMİ - ALT ALTA DİZİLİM */
+.item-tag-cards-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Mobil: Daha küçük gap ve responsive card styling */
+@media (max-width: 768px) {
+  .item-tag-cards-vertical {
+    gap: 12px;
+  }
+  
+  /* Mobile item card optimizations */
+  .item-tag-cards-vertical .MuiCard-root {
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+  
+  /* Ensure text is always visible on mobile */
+  .item-tag-cards-vertical .MuiTypography-root {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Mobile chip styling */
+  .item-tag-cards-vertical .MuiChip-root {
+    max-width: 100px !important;
+    font-size: 0.65rem !important;
+  }
+  
+  /* Mobile button sizing */
+  .item-tag-cards-vertical .MuiIconButton-root {
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+}
+
+/* Mobile Scrollbar Optimizations */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  .page-container {
+    touch-action: pan-y;
+    overflow-x: hidden;
+  }
+  
+  /* Smaller scrollbar on mobile */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border: 1px solid transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1px 4px rgba(255, 149, 0, 0.2);
+  }
+}
+
+/* Tablet Scrollbar */
+@media (min-width: 769px) and (max-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+}
