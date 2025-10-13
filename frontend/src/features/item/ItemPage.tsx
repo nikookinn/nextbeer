@@ -209,7 +209,7 @@ const ItemPage: React.FC = () => {
     setViewMode('list');
     setSelectedItem(null);
     
-    console.log('🔄 Resetting state for fresh data load');
+    console.log('Resetting state for fresh data load');
     // Reset state to trigger fresh data load
     setAllItems([]);
     setCurrentPage(0);
@@ -218,10 +218,10 @@ const ItemPage: React.FC = () => {
     
     // Force manual refetch after a small delay to ensure cache is invalidated
     setTimeout(async () => {
-      console.log('🔄 Manual refetch triggered');
+      console.log('Manual refetch triggered');
       try {
         const response = await refetch();
-        console.log('📦 Refetch response:', response);
+        console.log('Refetch response:', response);
         
         // Manually update state if refetch succeeded but useEffect didn't trigger
         if (response.data) {
@@ -232,7 +232,7 @@ const ItemPage: React.FC = () => {
           setHasInitiallyLoaded(true);
         }
       } catch (error) {
-        console.error('❌ Manual refetch failed:', error);
+        console.error('Manual refetch failed:', error);
       }
     }, 100);
   };
@@ -260,9 +260,9 @@ const ItemPage: React.FC = () => {
 
     try {
       await updateItemOrder(orderUpdates).unwrap();
-      // console.log('✅ Item order updated successfully');
+      // console.log('Item order updated successfully');
     } catch (error) {
-      // console.error('❌ Failed to update item order:', error);
+      // console.error('Failed to update item order:', error);
       // Revert on error - reload from server
       refetch();
     }
@@ -296,9 +296,9 @@ const ItemPage: React.FC = () => {
   }
 
   // Loading state with skeleton cards
-  console.log('🔍 Loading check - isLoading:', isLoading, 'hasInitiallyLoaded:', hasInitiallyLoaded, 'allItems.length:', allItems.length);
+  console.log('Loading check - isLoading:', isLoading, 'hasInitiallyLoaded:', hasInitiallyLoaded, 'allItems.length:', allItems.length);
   if (isLoading && !hasInitiallyLoaded) {
-    console.log('💀 Showing skeleton loading...');
+    console.log('Showing skeleton loading...');
     return (
       <Box 
         className="page-container"

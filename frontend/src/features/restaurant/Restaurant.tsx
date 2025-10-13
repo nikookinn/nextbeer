@@ -13,8 +13,8 @@ const Restaurant: React.FC = () => {
   // Debug: Check API response
   React.useEffect(() => {
     if (restaurant) {
-      // console.log('🍽️ Restaurant API Response:', restaurant);
-      // console.log('🖼️ ImageUrl:', restaurant.imageUrl);
+      // console.log('Restaurant API Response:', restaurant);
+      // console.log('ImageUrl:', restaurant.imageUrl);
     }
   }, [restaurant]);
   
@@ -70,9 +70,9 @@ const Restaurant: React.FC = () => {
       // Add image if selected
       if (formData.websiteImage) {
         submitFormData.append('restaurantImage', formData.websiteImage);
-        // console.log('📷 Image added to FormData:', formData.websiteImage.name, formData.websiteImage.size, 'bytes');
+        // console.log('Image added to FormData:', formData.websiteImage.name, formData.websiteImage.size, 'bytes');
       } else {
-        // console.log('❌ No image selected');
+        // console.log('No image selected');
       }
 
       // Determine if this is create or update
@@ -87,7 +87,7 @@ const Restaurant: React.FC = () => {
       }
 
       // Refetch data to get updated information
-      // console.log('🔄 Restaurant - Calling refetch to get updated data...');
+      // console.log('Restaurant - Calling refetch to get updated data...');
       refetch();
     } catch (error: any) {
       setSubmitError(

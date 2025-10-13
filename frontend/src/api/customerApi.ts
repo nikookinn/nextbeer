@@ -93,7 +93,7 @@ export const customerApi = createApi({
   endpoints: (builder) => ({
     // Get all campaigns for carousel
     getCampaigns: builder.query<PageResponse<Campaign>, { page?: number; size?: number }>({
-      query: ({ page = 0, size = 10 } = {}) => ({
+      query: ({ page = 0, size = 100 } = {}) => ({
         url: '/campaigns',
         params: { page, size },
       }),

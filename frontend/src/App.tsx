@@ -1,25 +1,30 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { ThemeProvider, CssBaseline, GlobalStyles } from '@mui/material';
-import { useAppSelector, useAppDispatch } from './hooks/redux';
+import { ThemeProvider } from '@mui/material/styles';
+import { Box, CircularProgress, CssBaseline, GlobalStyles } from '@mui/material';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { restoreAuth } from './features/auth/authSlice';
-import { createAppTheme } from './theme/index';
+import { createAppTheme } from './theme';
 import { useQRTracking } from './hooks/useQRTracking';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import LoginPage from './features/auth/LoginPage';
-import DashboardLayout from './components/layout/DashboardLayout';
-import Dashboard from './features/dashboard/Dashboard';
-import MenuPage from './features/menu/MenuPage';
-import CategoryPage from './features/category/CategoryPage';
-import ItemPage from './features/item/ItemPage';
-import Restaurant from './features/restaurant/Restaurant';
-import ItemTagPage from './features/itemTag/ItemTagPage';
-import CampaignPage from './features/campaign/CampaignPage';
-import SimpleCustomerHomepage from './components/customer/SimpleCustomerHomepage';
-import CustomerMenuDetail from './components/customer/CustomerMenuDetail';
-import CustomerItemDetail from './components/customer/CustomerItemDetail';
+
+// Customer Components (Always loaded)
+import { MUILandingPage } from './features/customer-mui';
+import MenuDetailPage from './features/customer-mui/menu/MenuDetailPage';
+import ItemDetailPage from './features/customer-mui/item/ItemDetailPage';
 import NotFound from './components/NotFound';
 import ErrorBoundary from './components/common/ErrorBoundary';
+
+// Admin Components (Lazy loaded)
+const ProtectedRoute = lazy(() => import('./components/auth/ProtectedRoute'));
+const LoginPage = lazy(() => import('./features/auth/LoginPage'));
+const DashboardLayout = lazy(() => import('./components/layout/DashboardLayout'));
+const Dashboard = lazy(() => import('./features/dashboard/Dashboard'));
+const MenuPage = lazy(() => import('./features/menu/MenuPage'));
+const CategoryPage = lazy(() => import('./features/category/CategoryPage'));
+const ItemPage = lazy(() => import('./features/item/ItemPage'));
+const Restaurant = lazy(() => import('./features/restaurant/Restaurant'));
+const ItemTagPage = lazy(() => import('./features/itemTag/ItemTagPage'));
+const CampaignPage = lazy(() => import('./features/campaign/CampaignPage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -42,9 +47,6 @@ function App() {
 
   useEffect(() => {
     // Force theme attribute on HTML element for CSS selectors
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Setting theme mode:', themeMode);
-    }
     document.documentElement.setAttribute('data-mui-color-scheme', themeMode);
     document.documentElement.setAttribute('data-theme', themeMode);
     document.body.className = themeMode;
@@ -70,33 +72,72 @@ function App() {
       />
       <Routes>
         {/* Public Routes - Customer-facing QR menu application */}
-        <Route path="/" element={<SimpleCustomerHomepage />} />
-        <Route path="/menu/:menuId" element={<CustomerMenuDetail />} />
-        <Route path="/item/:itemId" element={<CustomerItemDetail />} />
+        <Route path="/" element={<MUILandingPage />} />
+        <Route path="/menu/:menuId" element={<MenuDetailPage />} />
+        <Route path="/item/:itemId" element={<ItemDetailPage />} />
         
         {/* Admin Routes - Protected, authentication required */}
-        <Route path="/admin/login" element={<LoginPage />} />
+        <Route path="/admin/login" element={
+          <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <CircularProgress />
+          </Box>}>
+            <LoginPage />
+          </Suspense>
+        } />
         <Route
           path="/admin/*"
           element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
+            <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+              <CircularProgress />
+            </Box>}>
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            </Suspense>
           }
         >
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="menu" element={<MenuPage />} />
-          <Route path="campaign" element={<CampaignPage />} />
-          <Route path="category/:menuId" element={<CategoryPage />} />
-          <Route path="item/:categoryId" element={<ItemPage />} />
-          <Route path="restaurant" element={<Restaurant />} />
-          <Route path="item-tag" element={<ItemTagPage />} />
+          <Route path="dashboard" element={
+            <Suspense fallback={<CircularProgress />}>
+              <Dashboard />
+            </Suspense>
+          } />
+          <Route path="menu" element={
+            <Suspense fallback={<CircularProgress />}>
+              <MenuPage />
+            </Suspense>
+          } />
+          <Route path="campaign" element={
+            <Suspense fallback={<CircularProgress />}>
+              <CampaignPage />
+            </Suspense>
+          } />
+          <Route path="category/:menuId" element={
+            <Suspense fallback={<CircularProgress />}>
+              <CategoryPage />
+            </Suspense>
+          } />
+          <Route path="item/:categoryId" element={
+            <Suspense fallback={<CircularProgress />}>
+              <ItemPage />
+            </Suspense>
+          } />
+          <Route path="restaurant" element={
+            <Suspense fallback={<CircularProgress />}>
+              <Restaurant />
+            </Suspense>
+          } />
+          <Route path="item-tag" element={
+            <Suspense fallback={<CircularProgress />}>
+              <ItemTagPage />
+            </Suspense>
+          } />
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
         
         {/* 404 Catch-all Route - Must be last */}
         <Route path="*" element={<NotFound />} />
         </Routes>
+        
       </ThemeProvider>
     </ErrorBoundary>
   );

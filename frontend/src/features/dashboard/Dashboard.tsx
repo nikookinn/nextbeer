@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import {
   Box,
   Grid,
@@ -9,6 +9,7 @@ import {
   useTheme,
   useMediaQuery,
   Alert,
+  CircularProgress,
 } from '@mui/material';
 import {
   useGetDashboardStatsMutation,
@@ -19,8 +20,10 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { setSelectedRange, setCustomDates } from '../../store/slices/dashboardSlice';
 import { DateRangeType } from '../../types/dashboard.types';
 import StatsCard from '../../components/dashboard/StatsCard';
-import ScanChart from '../../components/dashboard/ScanChart';
 import DateRangePicker from '../../components/dashboard/DateRangePicker';
+
+// Lazy load chart component (contains Recharts)
+const ScanChart = lazy(() => import('../../components/dashboard/ScanChart'));
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -348,47 +351,59 @@ const Dashboard = () => {
         </Tabs>
 
         <TabPanel value={tabValue} index={0}>
-          <ScanChart
-            data={hourlyData || []}
-            loading={loadingHourly}
-            type="hourly"
-          />
+          <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
+            <ScanChart
+              data={hourlyData || []}
+              loading={loadingHourly}
+              type="hourly"
+            />
+          </Suspense>
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          <ScanChart
-            data={chartData || []}
-            loading={loadingChart}
-            type="daily"
-          />
+          <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
+            <ScanChart
+              data={chartData || []}
+              loading={loadingChart}
+              type="daily"
+            />
+          </Suspense>
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
-          <ScanChart
-            data={chartData || []}
-            loading={loadingChart}
-            type="daily"
-          />
+          <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
+            <ScanChart
+              data={chartData || []}
+              loading={loadingChart}
+              type="daily"
+            />
+          </Suspense>
         </TabPanel>
         <TabPanel value={tabValue} index={3}>
-          <ScanChart
-            data={chartData || []}
-            loading={loadingChart}
-            type="daily"
-          />
+          <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
+            <ScanChart
+              data={chartData || []}
+              loading={loadingChart}
+              type="daily"
+            />
+          </Suspense>
         </TabPanel>
         <TabPanel value={tabValue} index={4}>
-          <ScanChart
-            data={chartData || []}
-            loading={loadingChart}
-            type="daily"
-          />
+          <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
+            <ScanChart
+              data={chartData || []}
+              loading={loadingChart}
+              type="daily"
+            />
+          </Suspense>
         </TabPanel>
         <TabPanel value={tabValue} index={5}>
           {customDates.startDate && customDates.endDate ? (
-            <ScanChart
-              data={customChartData || []}
-              loading={loadingCustomChart}
-              type="daily"
-            />
+            <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>}>
+              <ScanChart
+                data={customChartData || []}
+                loading={loadingCustomChart}
+                type="daily"
+              />
+            </Suspense>
           ) : (
             <Alert severity="info">
               📅 Xüsusi dövr məlumatlarını görmək üçün yuxarıdan tarix aralığı seçin

@@ -114,7 +114,7 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
 
   return (
     <Box sx={{
-      p: { xs: 1.5, sm: 2, md: 3 }, // Mobile için daha az padding
+      p: { xs: 1.5, sm: 2, md: 3 },
       background: theme.palette.mode === 'light'
         ? 'linear-gradient(135deg, #FFFFFF 0%, #F5F5F7 100%)'
         : 'linear-gradient(135deg, #1C1C1E 0%, #000000 100%)',
@@ -126,8 +126,8 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
         ? '0 2px 8px rgba(0, 0, 0, 0.1)'
         : '0 2px 8px rgba(0, 0, 0, 0.3)',
       width: '100%',
-      overflow: 'hidden', // Chart'ı container içinde tut
-      position: 'relative' // Z-index için
+      overflow: 'hidden', 
+      position: 'relative'
     }}>
       <Box sx={{ mb: 3, display: 'flex', alignItems: 'center', gap: 2 }}>
         <Box sx={{
@@ -143,16 +143,16 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
       
       <ResponsiveContainer 
         width="100%" 
-        height={280} // Daha küçük height - container içinde kalması için
+        height={280}
       >
         {type === 'hourly' ? (
           <AreaChart 
             data={data} 
             margin={{ 
               top: 15, 
-              right: 15, // Mobile için küçük margin
+              right: 15,
               left: 10, 
-              bottom: 35 // Alt kısım için yeterli alan - azaltıldı
+              bottom: 35
             }}
           >
             <defs>
@@ -178,7 +178,7 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
               tickLine={false}
               tick={{ 
                 fill: theme.palette.text.secondary, 
-                fontSize: 10, // Mobile için daha küçük font
+                fontSize: 10,
                 fontWeight: 500
               }}
               tickFormatter={(value: number) => {
@@ -188,27 +188,26 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
                 if (value < 12) return `${value}A`;
                 return `${value - 12}P`;
               }}
-              interval={3} // Mobile için daha az tick (her 3 saatte bir)
-              angle={-30} // Daha az açı
+              interval={3}
+              angle={-30}
               textAnchor="end"
-              height={40} // Mobile için daha az yükseklik
+              height={40}
             />
             <YAxis 
               axisLine={false}
               tickLine={false}
               tick={{ 
                 fill: theme.palette.text.secondary, 
-                fontSize: 10 // Mobile için küçük font
+                fontSize: 10
               }}
-              width={35} // Mobile için dar width
+              width={35}
               tickFormatter={(value: number) => {
-                // Büyük sayıları kısalt
                 if (value >= 1000) return `${(value / 1000).toFixed(0)}k`;
                 return value.toString();
               }}
             />
             <Tooltip content={<CustomTooltip />} />
-            {/* Ana area chart */}
+            {/* Main area chart */}
             <Area
               type="monotone"
               dataKey="scans"
@@ -230,7 +229,7 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
                 filter: `drop-shadow(0 0 10px ${alpha(chartColors.secondary, 0.8)})`
               }}
             />
-            {/* İkinci katman - glow effect */}
+            {/* Second layer - glow effect */}
             <Area
               type="monotone"
               dataKey="scans"
@@ -240,7 +239,7 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
             />
           </AreaChart>
         ) : (
-          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}> {/* Alt margin arttırıldı */}
+          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={chartColors.primary} stopOpacity={0.6} />
@@ -262,7 +261,6 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
                 fontWeight: 500
               }}
               tickFormatter={(value: string) => {
-                // Tarih formatını iyileştir
                 const date = new Date(value);
                 return date.toLocaleDateString('tr-TR', { 
                   month: 'short', 
@@ -278,11 +276,10 @@ const ModernChart: React.FC<{ data: any[]; type: string }> = ({ data, type }) =>
               tickLine={false}
               tick={{ 
                 fill: theme.palette.text.secondary, 
-                fontSize: 10 // Mobile için küçük font
+                fontSize: 10
               }}
-              width={35} // Mobile için dar width
+              width={35}
               tickFormatter={(value: number) => {
-                // Büyük sayıları kısalt
                 if (value >= 1000) return `${(value / 1000).toFixed(0)}k`;
                 return value.toString();
               }}
@@ -375,7 +372,7 @@ const ScanChart: React.FC<ScanChartProps> = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: { xs: 250, sm: height }, // Responsive height
+          height: { xs: 250, sm: height },
         }}
       >
         <CircularProgress />
@@ -390,7 +387,7 @@ const ScanChart: React.FC<ScanChartProps> = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: { xs: 250, sm: height }, // Responsive height
+          height: { xs: 250, sm: height },
           flexDirection: 'column',
           gap: 2,
         }}
@@ -408,9 +405,9 @@ const ScanChart: React.FC<ScanChartProps> = ({
   return (
     <Box sx={{ 
       width: '100%',
-      height: 'auto', // Auto height - içeriğe göre ayarla
-      minHeight: { xs: 350, sm: 400 }, // Minimum height
-      overflow: 'visible', // Chart'ın tamamen görünmesini sağla
+      height: 'auto',
+      minHeight: { xs: 350, sm: 400 },
+      overflow: 'visible',
     }}>
       <ModernChart data={chartData} type={type} />
     </Box>

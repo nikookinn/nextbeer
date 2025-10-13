@@ -61,15 +61,6 @@ export const getFullImageUrl = (imageUrl: string | null | undefined): string | n
     fullUrl = `${baseUrl}${imageUrl}`;
   }
   
-  // Debug logging (only in development)
-  if (import.meta.env.DEV) {
-    console.log('🖼️ Image URL Debug:', {
-      originalImageUrl: imageUrl,
-      currentPort: currentPort,
-      baseUrl: baseUrl,
-      fullUrl: fullUrl
-    });
-  }
   
   return fullUrl;
 };

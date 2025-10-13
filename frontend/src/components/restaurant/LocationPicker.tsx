@@ -13,7 +13,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 });
 
-// Sadece OpenStreetMap orijinal haritası
+// Only OpenStreetMap orijinal map
 const MAP_STYLES = {
   openstreetmap: {
     name: 'OpenStreetMap',
@@ -28,7 +28,6 @@ interface LocationPickerProps {
   disabled?: boolean;
 }
 
-// Harita merkezini güncelleyen bileşen
 function MapUpdater({ center }: { center: [number, number] }) {
   const map = useMap();
   
@@ -78,10 +77,8 @@ const LocationPicker: React.FC<LocationPickerProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  const defaultLocation = value || { latitude: 41.0082, longitude: 28.9784 }; // Istanbul default
+  const defaultLocation = value || { latitude: 40.409264, longitude: 49.867092 };
   const currentStyle = MAP_STYLES.openstreetmap;
-  
-  // Harita merkezi - eğer konum seçilmişse onu kullan, yoksa varsayılan
   const mapCenter: [number, number] = value 
     ? [value.latitude, value.longitude] 
     : [defaultLocation.latitude, defaultLocation.longitude];
@@ -182,11 +179,11 @@ const LocationPicker: React.FC<LocationPickerProps> = ({
       >
         <MapContainer
           center={mapCenter}
-          zoom={value ? 16 : 13} // Seçilen konum varsa daha yakın zoom
+          zoom={value ? 16 : 13}
           style={{ height: '100%', width: '100%' }}
           zoomControl={true}
           scrollWheelZoom={true}
-          key={`openstreetmap-${value?.latitude}-${value?.longitude}`} // Force re-render when location changes
+          key={`openstreetmap-${value?.latitude}-${value?.longitude}`}
         >
           <TileLayer
             attribution={currentStyle.attribution}

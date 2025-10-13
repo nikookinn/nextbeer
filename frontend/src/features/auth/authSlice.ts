@@ -10,16 +10,16 @@ interface AuthState {
   error: string | null;
 }
 
-// Token'ı kontrol et ve geçersizse temizle
+// Check if token is valid else clean it
 const checkTokenValidity = () => {
   const token = localStorage.getItem('accessToken');
   if (token) {
     try {
-      // JWT token'ın payload kısmını decode et
+      // Decode JWT token payload
       const payload = JSON.parse(atob(token.split('.')[1]));
       const currentTime = Date.now() / 1000;
       
-      // Token süresi dolmuşsa temizle
+      // If token is expired clean it
       if (payload.exp && payload.exp < currentTime) {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
@@ -28,7 +28,7 @@ const checkTokenValidity = () => {
       }
       return token;
     } catch (error) {
-      // Token geçersizse temizle
+      // If token is invalid clean it
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('user');

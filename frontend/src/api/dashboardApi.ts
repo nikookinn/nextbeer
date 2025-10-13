@@ -9,16 +9,16 @@ import {
 
 export const dashboardApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // Spring Backend: GET /dashboard/stats with @RequestBody (POST gibi kullanım)
+    // Spring Backend: GET /dashboard/stats with @RequestBody
     getDashboardStats: builder.mutation<DashboardStatsResponse, DashboardStatsRequest>({
       query: (body) => ({
         url: '/dashboard/stats',
-        method: 'POST', // GET + @RequestBody yerine POST kullan
+        method: 'POST',
         body,
       }),
       invalidatesTags: ['Dashboard'],
     }),
-    // Spring Backend: GET /dashboard/chart/hourly-today (body yok)
+    // Spring Backend: GET /dashboard/chart/hourly-today
     getHourlyChartData: builder.query<HourlyChartData[], void>({
       query: () => '/dashboard/chart/hourly-today',
       providesTags: ['Dashboard'],
@@ -27,7 +27,7 @@ export const dashboardApi = baseApi.injectEndpoints({
     getChartData: builder.mutation<DailyChartData[], ChartRequest>({
       query: (body) => ({
         url: '/dashboard/chart',
-        method: 'POST', // GET + @RequestBody yerine POST kullan
+        method: 'POST',
         body,
       }),
       invalidatesTags: ['Dashboard'],
@@ -36,11 +36,10 @@ export const dashboardApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetDashboardStatsMutation, // mutation oldu
-  useGetHourlyChartDataQuery,   // query kaldı
-  useGetChartDataMutation,      // mutation oldu
+  useGetDashboardStatsMutation,
+  useGetHourlyChartDataQuery,
+  useGetChartDataMutation,
 } = dashboardApi;
 
-// Backward compatibility için alias'lar
 export const useGetDashboardStatsQuery = useGetDashboardStatsMutation;
 export const useGetChartDataQuery = useGetChartDataMutation;

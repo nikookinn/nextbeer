@@ -16,9 +16,9 @@ import {
   useTheme,
 } from '@mui/material';
 import {
-  Visibility,
-  VisibilityOff,
-} from '@mui/icons-material';
+  Eye,
+  EyeOff,
+} from 'lucide-react';
 import { ChefHat } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -273,7 +273,7 @@ const LoginPage = () => {
                                 color: theme.palette.mode === 'light' ? '#007AFF' : '#0A84FF',
                               }}
                             >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
+                              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                             </IconButton>
                           </InputAdornment>
                         ),

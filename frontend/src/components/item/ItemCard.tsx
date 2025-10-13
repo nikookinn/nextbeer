@@ -21,7 +21,7 @@ interface ItemCardProps {
   onEdit: (item: ItemResponseDto) => void;
   onDelete: (item: ItemResponseDto) => void;
   isDragging?: boolean;
-  dragControls?: any; // Add dragControls prop
+  dragControls?: any;
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ item, onEdit, onDelete, isDragging = false, dragControls }) => {

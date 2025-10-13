@@ -42,7 +42,7 @@ const MenuForm: React.FC<MenuFormProps> = ({
 
   // Initialize form with existing data
   useEffect(() => {
-    // console.log('🔄 MenuForm useEffect triggered with initialData:', initialData);
+    // console.log('MenuForm useEffect triggered with initialData:', initialData);
     
     if (initialData) {
       setFormData({
@@ -54,19 +54,19 @@ const MenuForm: React.FC<MenuFormProps> = ({
       if (initialData.imageUrl) {
         const fullImageUrl = getFullImageUrl(initialData.imageUrl);
         
-        // console.log('📱 MenuForm Debug - Original imageUrl:', initialData.imageUrl);
-        // console.log('📱 MenuForm Debug - Full imageUrl:', fullImageUrl);
-        // console.log('📱 MenuForm Debug - Setting imagePreview to:', fullImageUrl);
+        // console.log('MenuForm Debug - Original imageUrl:', initialData.imageUrl);
+        // console.log('MenuForm Debug - Full imageUrl:', fullImageUrl);
+        // console.log('MenuForm Debug - Setting imagePreview to:', fullImageUrl);
         
         setImagePreview(fullImageUrl);
         setSelectedImage(null);
       } else {
-        // console.log('⚠️ MenuForm Debug - No imageUrl in initialData');
+        // console.log('MenuForm Debug - No imageUrl in initialData');
         setImagePreview(null);
         setSelectedImage(null);
       }
     } else {
-      // console.log('⚠️ MenuForm Debug - No initialData provided');
+      // console.log('MenuForm Debug - No initialData provided');
       setImagePreview(null);
       setSelectedImage(null);
     }
@@ -287,11 +287,11 @@ const MenuForm: React.FC<MenuFormProps> = ({
                         display: 'block'
                       }}
                       onError={() => {
-                        // console.error('❌ MenuForm - Image failed to load:', imagePreview);
+                        // console.error('MenuForm - Image failed to load:', imagePreview);
                         setImagePreview(null);
                       }}
                       onLoad={() => {
-                        // console.log('✅ MenuForm - Image loaded successfully:', imagePreview);
+                        // console.log('MenuForm - Image loaded successfully:', imagePreview);
                       }}
                     />
                     <IconButton

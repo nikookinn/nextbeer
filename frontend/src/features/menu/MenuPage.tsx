@@ -207,7 +207,7 @@ const MenuPage: React.FC = () => {
       }
 
       // Debug logging
-      console.log('🍽️ Menu FormData Debug:', {
+      console.log('Menu FormData Debug:', {
         menuData: menuData,
         hasImage: !!formData.menuImage,
         formDataKeys: Array.from(submitFormData.keys()),

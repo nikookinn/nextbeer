@@ -22,7 +22,7 @@ interface DateRangePickerProps {
   startDate: Date | null;
   endDate: Date | null;
   onDateRangeChange: (startDate: Date | null, endDate: Date | null) => void;
-  onClear?: () => void; // Clear callback eklendi
+  onClear?: () => void; // Clear callback added
   disabled?: boolean;
 }
 
@@ -64,7 +64,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     setTempStartDate(null);
     setTempEndDate(null);
     onDateRangeChange(null, null);
-    // Clear callback'i çağır (tab'ı Hourly'ye geçirmek için)
+    // Call clear callback for hours tab
     if (onClear) {
       onClear();
     }

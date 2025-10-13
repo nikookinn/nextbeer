@@ -12,8 +12,7 @@ import {
   CircularProgress,
   useTheme,
 } from '@mui/material';
-import { Upload, X, Store, Phone, Mail, Clock, MapPin, Instagram, Facebook } from 'lucide-react';
-import { FaTiktok } from 'react-icons/fa';
+import { Upload, X, Store, Phone, Mail, Clock, MapPin, Instagram, Facebook, Music } from 'lucide-react';
 import { RestaurantFormData, RestaurantResponseDto, LocationCoordinates } from '../../types/restaurant.types';
 import LocationPicker from './LocationPicker';
 import { getFullImageUrl } from '../../utils/imageUtils';
@@ -52,7 +51,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
 
   // Initialize form with existing data
   useEffect(() => {
-    // console.log('🔄 RestaurantForm useEffect triggered with initialData:', initialData);
+    // console.log('RestaurantForm useEffect triggered with initialData:', initialData);
     
     if (initialData) {
       setFormData({
@@ -74,21 +73,21 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
       if (initialData.imageUrl) {
         const fullImageUrl = getFullImageUrl(initialData.imageUrl);
         
-        // console.log('📱 RestaurantForm Debug - Original imageUrl:', initialData.imageUrl);
-        // console.log('📱 RestaurantForm Debug - Full imageUrl:', fullImageUrl);
-        // console.log('📱 RestaurantForm Debug - Current hostname:', window.location.hostname);
-        // console.log('📱 RestaurantForm Debug - Setting imagePreview to:', fullImageUrl);
+        // console.log('RestaurantForm Debug - Original imageUrl:', initialData.imageUrl);
+        // console.log('RestaurantForm Debug - Full imageUrl:', fullImageUrl);
+        // console.log('RestaurantForm Debug - Current hostname:', window.location.hostname);
+        // console.log('RestaurantForm Debug - Setting imagePreview to:', fullImageUrl);
         
         setImagePreview(fullImageUrl);
         // Clear selected image since we're showing existing image
         setSelectedImage(null);
       } else {
-        // console.log('⚠️ RestaurantForm Debug - No imageUrl in initialData');
+        // console.log('RestaurantForm Debug - No imageUrl in initialData');
         setImagePreview(null);
         setSelectedImage(null);
       }
     } else {
-      // console.log('⚠️ RestaurantForm Debug - No initialData provided');
+      // console.log('RestaurantForm Debug - No initialData provided');
       setImagePreview(null);
       setSelectedImage(null);
     }
@@ -355,7 +354,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
                     onChange={handleInputChange('twitterUrl')}
                     placeholder="https://tiktok.com/@restoraniniz"
                     InputProps={{
-                      startAdornment: <FaTiktok size={20} style={{ marginRight: 8, color: '#666' }} />,
+                      startAdornment: <Music size={20} style={{ marginRight: 8, color: '#666' }} />,
                     }}
                   />
                 </Grid>
@@ -453,14 +452,14 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
                           display: 'block'
                         }}
                         onError={() => {
-                          // console.error('❌ RestaurantForm - Image failed to load:', imagePreview);
-                          // console.error('❌ RestaurantForm - Current hostname:', window.location.hostname);
-                          // console.error('❌ RestaurantForm - Trying to load from backend...');
+                          // console.error('RestaurantForm - Image failed to load:', imagePreview);
+                          // console.error('RestaurantForm - Current hostname:', window.location.hostname);
+                          // console.error('RestaurantForm - Trying to load from backend...');
                           // Reset to no image state instead of showing X
                           setImagePreview(null);
                         }}
                         onLoad={() => {
-                          // console.log('✅ RestaurantForm - Image loaded successfully:', imagePreview);
+                          // console.log('RestaurantForm - Image loaded successfully:', imagePreview);
                         }}
                       />
                       <IconButton

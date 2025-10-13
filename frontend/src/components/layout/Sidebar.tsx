@@ -33,7 +33,6 @@ interface SidebarProps {
 }
 
 
-// Icon component'ları fonksiyon olarak tanımlayalım ki renk verebilmek
 const getNavItems = (theme: any, isActive: boolean) => [
   {
     title: 'İdarə Paneli',
@@ -95,12 +94,12 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
       {/* Header - Logo ve Title */}
       <Box
         sx={{
-          p: open ? 2 : 1, // Açık/kapalıya göre padding
+          p: open ? 2 : 1,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: open ? 'flex-start' : 'center', // Ortalama
+          justifyContent: open ? 'flex-start' : 'center',
           gap: open ? 1.5 : 0,
-          minHeight: 64, // Sabit yükseklik
+          minHeight: 64,
         }}
       >
         <Avatar
@@ -111,12 +110,12 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
             borderRadius: 2,
             bgcolor: 'rgba(255, 255, 255, 0.1)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
-            flexShrink: 0, // Küçülmesin
+            flexShrink: 0,
           }}
         >
           🍺
         </Avatar>
-        {open && ( // Sadece açıkken göster
+        {open && (
           <Box sx={{ 
             overflow: 'hidden',
             opacity: open ? 1 : 0,
@@ -161,7 +160,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
                 selected={isActive}
                 sx={{
                   borderRadius: 2,
-                  justifyContent: open ? 'flex-start' : 'center', // Ortalama
+                  justifyContent: open ? 'flex-start' : 'center',
                   px: open ? 2 : 1,
                   minHeight: 48,
                   '&.Mui-selected': {
@@ -179,13 +178,13 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
               >
                 <ListItemIcon
                   sx={{
-                    minWidth: open ? 40 : 'auto', // Açık/kapalıya göre
+                    minWidth: open ? 40 : 'auto',
                     justifyContent: 'center',
                   }}
                 >
                   {currentItem?.icon || item.icon}
                 </ListItemIcon>
-                {open && ( // Sadece açıkken text göster
+                {open && (
                   <ListItemText
                     primary={item.title}
                     primaryTypographyProps={{
@@ -213,7 +212,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
         borderColor: theme.palette.mode === 'light' ? '#E5E5E7' : '#2C2C2E' 
       }} />
       
-      {/* Footer - Sadece açıkken göster */}
+      {/* Footer - Show when only open */}
       {open && (
         <Box sx={{ 
           p: 2,
@@ -240,14 +239,13 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
   return (
     <Drawer
       variant={isMobile ? 'temporary' : 'persistent'}
-      open={isMobile ? open : true} // Desktop'ta her zaman açık (mini veya full)
+      open={isMobile ? open : true} 
       onClose={onClose}
-      // Smooth transition için MUI'nin kendi transition'ını kullan
       sx={{
-        width: isMobile ? (open ? width : 0) : (open ? width : closedWidth), // Desktop'ta mini drawer
+        width: isMobile ? (open ? width : 0) : (open ? width : closedWidth),
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: isMobile ? width : (open ? width : closedWidth), // Desktop'ta mini drawer
+          width: isMobile ? width : (open ? width : closedWidth),
           boxSizing: 'border-box',
           borderRight: theme.palette.mode === 'light'
             ? '1px solid #E5E5E7'
@@ -258,18 +256,17 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
           boxShadow: theme.palette.mode === 'light'
             ? '2px 0 8px rgba(0, 0, 0, 0.1)'
             : '2px 0 8px rgba(0, 0, 0, 0.3)',
-          pt: { xs: 7, sm: 8 }, // Responsive AppBar height padding
-          zIndex: theme.zIndex.drawer - 1, // AppBar'dan daha da düşük
-          position: 'fixed', // Fixed position
-          height: '100vh', // Full height
+          pt: { xs: 7, sm: 8 },
+          zIndex: theme.zIndex.drawer - 1,
+          position: 'fixed',
+          height: '100vh',
           top: 0,
           left: 0,
           transition: theme.transitions.create(['width'], {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.standard,
           }),
-          overflowX: 'hidden', // Yatay overflow gizle
-          // Mobile'da slide, desktop'ta width değişimi
+          overflowX: 'hidden',
           ...(isMobile && {
             transform: open ? 'translateX(0)' : `translateX(-${width}px)`,
             transition: theme.transitions.create(['transform'], {
@@ -277,7 +274,6 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, width, closedWidth = 6
               duration: theme.transitions.duration.standard,
             }),
           }),
-          // Desktop'ta width değişimi için ek smooth transition
           ...(!isMobile && {
             transition: theme.transitions.create(['width'], {
               easing: theme.transitions.easing.easeInOut,

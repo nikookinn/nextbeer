@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import {
   TrendingUp,
   TrendingDown,
-} from '@mui/icons-material';
+} from 'lucide-react';
 import * as colors from '@radix-ui/colors';
 
 interface StatsCardProps {

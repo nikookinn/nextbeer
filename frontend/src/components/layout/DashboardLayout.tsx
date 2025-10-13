@@ -4,21 +4,21 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import CustomAppBar from './CustomAppBar';
 import Sidebar from './Sidebar';
 
-const DRAWER_WIDTH = 240; // Açık sidebar genişliği
-const DRAWER_WIDTH_CLOSED = 64; // Kapalı sidebar genişliği (sadece ikonlar)
-const DRAWER_WIDTH_MOBILE = 280; // Mobile'da biraz daha geniş
+const DRAWER_WIDTH = 240;
+const DRAWER_WIDTH_CLOSED = 64;
+const DRAWER_WIDTH_MOBILE = 280;
 
 const DashboardLayout = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
   
-  // Desktop'ta mini drawer logic'i
+  // Desktop mini drawer logic
   const getEffectiveDrawerWidth = () => {
     if (isMobile) {
-      return sidebarOpen ? DRAWER_WIDTH_MOBILE : 0; // Mobile: tam açık veya tamamen kapalı
+      return sidebarOpen ? DRAWER_WIDTH_MOBILE : 0;
     }
-    return sidebarOpen ? DRAWER_WIDTH : DRAWER_WIDTH_CLOSED; // Desktop: tam açık veya mini
+    return sidebarOpen ? DRAWER_WIDTH : DRAWER_WIDTH_CLOSED;
   };
 
   const handleDrawerToggle = () => {
@@ -66,9 +66,9 @@ const DashboardLayout = () => {
       >
         <Box sx={{ 
           width: '100%', 
-          minHeight: '100%', // height yerine minHeight
-          p: 0, // Hiç padding yok, Dashboard kendi padding'ini yönetecek
-          overflow: 'visible', // İçerik taşmasına izin ver
+          minHeight: '100%',
+          p: 0,
+          overflow: 'visible',
         }}>
           <Outlet />
         </Box>
