@@ -329,8 +329,8 @@ const ItemDetailPage: React.FC = () => {
                             <Typography sx={{ fontSize: '1rem', fontWeight: 500, color: '#FFFFFF' }}>
                               {variant.name}
                             </Typography>
-                            <Typography sx={{ fontSize: '1.2rem', fontWeight: 700, color: '#30D158' }}>
-                              {formatPrice(variant.price)}
+                            <Typography sx={{ fontSize: '1.2rem', fontWeight: 700, color: variant.price === 0 ? '#FF9F0A' : '#30D158' }}>
+                              {variant.price === 0 ? 'n/a' : formatPrice(variant.price)}
                             </Typography>
                           </Box>
                         ))}
@@ -475,8 +475,8 @@ const ItemDetailPage: React.FC = () => {
                             <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, color: '#FFFFFF' }}>
                               {variant.name}
                             </Typography>
-                            <Typography sx={{ fontSize: '1.4rem', fontWeight: 700, color: '#30D158' }}>
-                              {formatPrice(variant.price)}
+                            <Typography sx={{ fontSize: '1.4rem', fontWeight: 700, color: variant.price === 0 ? '#FF9F0A' : '#30D158' }}>
+                              {variant.price === 0 ? 'N/A' : formatPrice(variant.price)}
                             </Typography>
                           </Box>
                         ))}

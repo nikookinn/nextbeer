@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/redux';
 import {
   Box,
   Typography,
@@ -22,6 +23,7 @@ import {
   useGetItemsByCategoryIdQuery,
   useDeleteItemMutation,
   useUpdateItemOrderMutation,
+  itemApi,
 } from '../../api/itemApi';
 import { useGetCategoryByIdQuery } from '../../api/categoryApi';
 import { useGetMenuByIdQuery } from '../../api/menuApi';
@@ -76,6 +78,7 @@ const DraggableItemCard: React.FC<DraggableItemCardProps> = ({ item, onEdit, onD
 const ItemPage: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { categoryId } = useParams<{ categoryId: string }>();
   
   // Convert categoryId to number
@@ -148,28 +151,46 @@ const ItemPage: React.FC = () => {
 
     try {
       const nextPage = currentPage + 1;
-      const response = await refetch();
+      console.log('🔄 Loading more items - nextPage:', nextPage, 'categoryId:', categoryIdNumber);
       
-      if (response.data) {
-        const newItems = response.data.content.filter(
+      // Use dispatch to make a new query with the correct page number
+      const response = await dispatch(
+        itemApi.endpoints.getItemsByCategoryId.initiate({
+          categoryId: categoryIdNumber,
+          page: nextPage,
+          size: 10
+        })
+      ).unwrap();
+      
+      if (response && response.content) {
+        console.log('✅ Loaded', response.content.length, 'new items for page', nextPage);
+        
+        // Filter out duplicates (safety check)
+        const newItems = response.content.filter(
           (newItem: ItemResponseDto) => !allItems.some(existingItem => existingItem.itemId === newItem.itemId)
         );
         
         setAllItems(prev => [...prev, ...newItems]);
         setCurrentPage(nextPage);
-        setHasNextPage(!response.data.last);
-        setIsFetching(false);
+        setHasNextPage(!response.last);
       }
     } catch (error) {
-      // console.error('Error loading more items:', error);
+      console.error('Error loading more items:', error);
     }
-  }, [hasNextPage, isLoading, currentPage, allItems, refetch]);
+  }, [hasNextPage, isLoading, currentPage, allItems, categoryIdNumber, dispatch]);
 
   // Infinite scroll hook
   const { isFetching, setIsFetching, lastElementRef } = useInfiniteScroll(
     hasNextPage,
     loadMoreItems
   );
+
+  // Reset isFetching when there are no more pages to prevent stuck loading state
+  useEffect(() => {
+    if (!hasNextPage && isFetching) {
+      setIsFetching(false);
+    }
+  }, [hasNextPage, isFetching, setIsFetching]);
 
   const handleAddNew = () => {
     setSelectedItem(null);
@@ -210,29 +231,48 @@ const ItemPage: React.FC = () => {
     setSelectedItem(null);
     
     console.log('Resetting state for fresh data load');
-    // Reset state to trigger fresh data load
+    // Reset infinity scroll state completely
     setAllItems([]);
     setCurrentPage(0);
     setHasNextPage(true);
     setHasInitiallyLoaded(false);
+    setIsFetching(false); // Reset fetching state
     
-    // Force manual refetch after a small delay to ensure cache is invalidated
+    // Force manual refetch of first page after a small delay to ensure cache is invalidated
     setTimeout(async () => {
-      console.log('Manual refetch triggered');
+      console.log('Manual refetch triggered for first page');
       try {
-        const response = await refetch();
-        console.log('Refetch response:', response);
+        const response = await dispatch(
+          itemApi.endpoints.getItemsByCategoryId.initiate({
+            categoryId: categoryIdNumber,
+            page: 0,
+            size: 10
+          }, { forceRefetch: true }) // Force fresh data
+        ).unwrap();
         
-        // Manually update state if refetch succeeded but useEffect didn't trigger
-        if (response.data) {
-          console.log('🔧 Manually setting items after refetch');
-          setAllItems(response.data.content);
-          setHasNextPage(!response.data.last);
+        console.log('Fresh data loaded:', response);
+        
+        if (response && response.content) {
+          console.log('🔧 Manually setting fresh items after form success');
+          setAllItems(response.content);
+          setHasNextPage(!response.last);
           setCurrentPage(0);
           setHasInitiallyLoaded(true);
         }
       } catch (error) {
         console.error('Manual refetch failed:', error);
+        // Fallback to original refetch if dispatch fails
+        try {
+          const fallbackResponse = await refetch();
+          if (fallbackResponse.data) {
+            setAllItems(fallbackResponse.data.content);
+            setHasNextPage(!fallbackResponse.data.last);
+            setCurrentPage(0);
+            setHasInitiallyLoaded(true);
+          }
+        } catch (fallbackError) {
+          console.error('Fallback refetch also failed:', fallbackError);
+        }
       }
     }, 100);
   };
@@ -543,7 +583,7 @@ const ItemPage: React.FC = () => {
           ))}
           
           {/* Loading more indicator */}
-          {isFetching && (
+          {isFetching && hasNextPage && (
             <Box sx={{ display: 'flex', justifyContent: 'center', py: 3 }}>
               <CircularProgress size={24} />
               <Typography variant="body2" color="text.secondary" sx={{ ml: 2 }}>

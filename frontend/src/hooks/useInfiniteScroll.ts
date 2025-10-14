@@ -29,15 +29,26 @@ export const useInfiniteScroll = (
       observer.current = new IntersectionObserver(
         (entries) => {
           const now = Date.now();
+          const entry = entries[0];
           // Prevent rapid firing - minimum 300ms between triggers
-          if (entries[0].isIntersecting && hasNextPage && !isFetching && (now - lastTriggerTime.current > 300)) {
-            console.log('🔄 Infinite Scroll - Loading next page...');
+          if (entry.isIntersecting && hasNextPage && !isFetching && (now - lastTriggerTime.current > 300)) {
+            console.log('🔄 Infinite Scroll - Loading next page...', {
+              hasNextPage,
+              isFetching,
+              timeSinceLastTrigger: now - lastTriggerTime.current
+            });
             lastTriggerTime.current = now;
             setIsFetching(true);
             // Small delay for smooth UX
             setTimeout(() => {
               fetchNextPage();
             }, 150);
+          } else if (entry.isIntersecting) {
+            console.log('🚫 Infinite Scroll - Skipped trigger', {
+              hasNextPage,
+              isFetching,
+              timeSinceLastTrigger: now - lastTriggerTime.current
+            });
           }
         },
         {

@@ -132,8 +132,8 @@ const ItemForm: React.FC<ItemFormProps> = ({
           newErrors[`variant_${index}_price`] = 'Variant qiyməti tələb olunur';
         } else {
           const variantPrice = parseFloat(variant.price);
-          if (isNaN(variantPrice) || variantPrice <= 0) {
-            newErrors[`variant_${index}_price`] = 'Variant qiyməti müsbət olmalıdır';
+          if (isNaN(variantPrice) || variantPrice < 0) {
+            newErrors[`variant_${index}_price`] = 'Variant qiyməti mənfi ola bilməz';
           }
         }
       });
@@ -761,10 +761,10 @@ const ItemForm: React.FC<ItemFormProps> = ({
                         placeholder="0.00"
                         type="number"
                         error={!!errors[`variant_${index}_price`]}
-                        helperText={errors[`variant_${index}_price`] || '0-dan böyük olmalıdır'}
+                        helperText={errors[`variant_${index}_price`] || '0 və ya daha böyük ola bilər (0 = Qiymətlər dəyişkəndir)'}
                         inputProps={{
                           step: '0.01',
-                          min: '0.01',
+                          min: '0',
                         }}
                         InputProps={{
                           startAdornment: (
