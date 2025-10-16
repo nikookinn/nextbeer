@@ -23,6 +23,7 @@ const MenuHeader = lazy(() => import('./components/MenuHeader'));
 const SearchBar = lazy(() => import('./components/SearchBar'));
 const CategoryPills = lazy(() => import('./components/CategoryPills'));
 const SearchResults = lazy(() => import('./components/SearchResults'));
+const ScrollToTopButton = lazy(() => import('./components/ScrollToTopButton'));
 
 const FixedMenuDetailPage: React.FC = () => {
   const theme = useTheme();
@@ -216,6 +217,11 @@ const FixedMenuDetailPage: React.FC = () => {
         </Box>
       }>
         <Footer />
+      </Suspense>
+
+      {/* Scroll to Top Button */}
+      <Suspense fallback={null}>
+        <ScrollToTopButton showThreshold={400} scrollDuration={600} />
       </Suspense>
     </Box>
   );

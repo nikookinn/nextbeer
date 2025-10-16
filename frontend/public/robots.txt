@@ -1,36 +1,11 @@
-# NextBeer Resto & Pub - Robots.txt
-# Bu dosya arama motorlarına hangi sayfaları tarayabileceklerini söyler
-
 User-agent: *
 Allow: /
 
-# Ana sayfalar - Arama motorları için açık
-Allow: /
-Allow: /campaigns
-Allow: /about
-Allow: /menu/*
-Allow: /item/*
+# Admin pages - hide on search engine
+Disallow: /admin/
 
-# Admin sayfaları - Arama motorlarından gizle
-Disallow: /admin
-Disallow: /admin/*
-
-# API endpoints - Arama motorlarından gizle
+# API endpoints - hide on search engine
 Disallow: /api/
-Disallow: /api/*
 
-# QR kod tracking parametreleri - Arama motorlarından gizle
-Disallow: /*?source=qr
-Disallow: /*?source=*
-Disallow: /*?qr=*
-Disallow: /*?track=*
-
-# Static assets - Gereksiz tarama engelle
-Disallow: /assets/
-Disallow: /static/
-
-# Sitemap - Google Site Links için gerekli
-Sitemap: https://nextbeer.com/sitemap.xml
-
-# Crawl delay (opsiyonel - sunucu yükünü azaltır)
-Crawl-delay: 1
+# Sitemap
+Sitemap: https://nextbeer.az/sitemap.xml

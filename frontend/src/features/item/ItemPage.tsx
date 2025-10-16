@@ -182,7 +182,10 @@ const ItemPage: React.FC = () => {
   // Infinite scroll hook
   const { isFetching, setIsFetching, lastElementRef } = useInfiniteScroll(
     hasNextPage,
-    loadMoreItems
+    async () => {
+      await loadMoreItems();
+      setIsFetching(false);
+    }
   );
 
   // Reset isFetching when there are no more pages to prevent stuck loading state
