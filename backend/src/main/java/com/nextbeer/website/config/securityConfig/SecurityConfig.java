@@ -88,6 +88,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/error").permitAll();
 
                     // Public API endpoints
+                    auth.requestMatchers(HttpMethod.GET, "/api/v1/downloadAll").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/api/v1/menus/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll();
