@@ -284,7 +284,7 @@ const LandingPage: React.FC = () => {
               >
                 <Box
                   component="img"
-                  src="/images/logo.png"
+                  src="/images/logo_nomre_beer.png"
                   alt="NextBeer"
                   sx={{
                     display: 'block',

@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
 
   // Create custom marker icon
   const customIcon = useMemo(() => {
-    const logoUrl = restaurant?.logoUrl || '/images/logo.png';
+    const logoUrl = restaurant?.logoUrl || '/images/logo_nomre_beer.png';
     return new L.DivIcon({
       className: 'custom-div-icon',
       html: `<img src="${logoUrl}" alt="Logo" style="

@@ -71,7 +71,7 @@ export const getFullImageUrl = (imageUrl: string | null | undefined): string | n
  * @returns Restaurant logo URL
  */
 export const getRestaurantLogoUrl = (): string => {
-  return '/images/logo.png';
+  return '/images/logo_nomre_beer.png';
 };
 
 /**

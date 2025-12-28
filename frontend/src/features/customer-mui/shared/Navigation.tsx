@@ -101,7 +101,7 @@ const PremiumNavigation: React.FC<NavigationProps> = ({ onNavigate }) => {
           >
             <Box
               component="img"
-              src="/images/logo.png"
+              src="/images/logo_nomre_beer.png"
               alt="NextBeer"
               sx={{
                 width: { xs: 32, sm: 36 },
