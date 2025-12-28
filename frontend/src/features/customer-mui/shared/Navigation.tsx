@@ -106,7 +106,7 @@ const PremiumNavigation: React.FC<NavigationProps> = ({ onNavigate }) => {
               sx={{
                 width: { xs: 32, sm: 36 },
                 height: { xs: 32, sm: 36 },
-                borderRadius: 2,
+                borderRadius: '50%',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 transition: 'all 0.2s ease',
                 '&:hover': {

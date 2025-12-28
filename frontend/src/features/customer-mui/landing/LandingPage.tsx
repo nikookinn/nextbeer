@@ -155,8 +155,8 @@ const LandingPage: React.FC = () => {
           <Box
             sx={{
               position: 'absolute',
-              top: '15%',
-              right: '15%',
+              top: '10%',
+              right: '5%',
               animation: 'martiniSpin 8s linear infinite',
               '@keyframes martiniSpin': {
                 '0%': { transform: 'rotate(0deg) scale(1)' },
@@ -172,7 +172,7 @@ const LandingPage: React.FC = () => {
           <Box
             sx={{
               position: 'absolute',
-              bottom: '25%',
+              bottom: '32%',
               left: '5%',
               animation: 'beerBounce 6s ease-in-out infinite',
               '@keyframes beerBounce': {
@@ -190,8 +190,8 @@ const LandingPage: React.FC = () => {
           <Box
             sx={{
               position: 'absolute',
-              top: '15%',
-              left: '8%',
+              top: '10%',
+              left: '5%',
               animation: 'utensilsWobble 10s ease-in-out infinite',
               '@keyframes utensilsWobble': {
                 '0%, 100%': { transform: 'rotate(0deg) scale(1)' },
@@ -208,7 +208,7 @@ const LandingPage: React.FC = () => {
           <Box
             sx={{
               position: 'absolute',
-              bottom: '10%',
+              bottom: '35%',
               right: '5%',
               animation: 'cupSodaPulse 7s ease-in-out infinite',
               '@keyframes cupSodaPulse': {
@@ -225,7 +225,7 @@ const LandingPage: React.FC = () => {
           <Box
             sx={{
               position: 'absolute',
-              top: '40%',
+              top: '30%',
               left: '50%',
               animation: 'citrusFloat 9s ease-in-out infinite',
               '@keyframes citrusFloat': {
@@ -259,30 +259,45 @@ const LandingPage: React.FC = () => {
         <Container maxWidth="md" sx={{ position: 'relative', zIndex: 3 }}>
           <Fade in timeout={1200}>
             <Box sx={{ textAlign: 'center', py: { xs: 3, md: 4 } }}>
-              <Typography
-                variant="h1"
+              <Box
                 sx={{
-                  fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem', lg: '5rem' },
-                  fontWeight: 700,
-                  lineHeight: { xs: 1.1, md: 1.05 },
-                  letterSpacing: '-0.025em',
-                  color: '#FFFFFF',
-                  mb: 4,
-                  maxWidth: 800,
-                  mx: 'auto',
-                  '& .highlight': {
-                    background: 'linear-gradient(135deg, #0A84FF 0%, #30D158 100%)',
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                  position: 'relative',
+                  display: 'inline-block',
+                  mb: { xs: 2, sm: 2 },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '5%',
+                    left: '5%',
+                    right: '5%',
+                    bottom: '5%',
+                    borderRadius: '50%',
+                    boxShadow: `
+                      0 0 15px 3px rgba(255, 200, 80, 0.8),
+                      0 0 25px 6px rgba(255, 215, 100, 0.5),
+                      0 0 35px 10px rgba(255, 220, 120, 0.3)
+                    `,
+                    zIndex: 0,
+                    pointerEvents: 'none',
                   },
                 }}
               >
-                NextBeer-ə{' '}
-                <Box component="span" className="highlight">
-                  Xoş Gəlmisiniz
-                </Box>
-              </Typography>
+                <Box
+                  component="img"
+                  src="/images/logo.png"
+                  alt="NextBeer"
+                  sx={{
+                    display: 'block',
+                    width: { xs: 280, sm: 320, md: 300 },
+                    height: { xs: 280, sm: 320, md: 300 },
+                    objectFit: 'contain',
+                    borderRadius: '50%',
+                    backgroundColor: 'transparent',
+                    position: 'relative',
+                    zIndex: 1,
+                  }}
+                />
+              </Box>
               
               <Typography
                 variant="h5"
@@ -291,7 +306,7 @@ const LandingPage: React.FC = () => {
                   fontWeight: 400,
                   lineHeight: 1.6,
                   color: 'rgba(255, 255, 255, 0.7)',
-                  mb: 6,
+                  mb: { xs: 3, md: 6 },
                   maxWidth: 600,
                   mx: 'auto',
                 }}
