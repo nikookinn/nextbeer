@@ -409,7 +409,7 @@ const Footer: React.FC = () => {
               fontSize: '0.875rem',
             }}
           >
-            © 2025 {restaurant.name}. ALL RIGHTS RESERVED.
+            © {new Date().getFullYear()} {restaurant.name}. ALL RIGHTS RESERVED.
           </Typography>
         </Box>
       </Container>

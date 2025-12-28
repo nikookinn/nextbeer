@@ -21,6 +21,7 @@ import {
   Megaphone as CampaignIcon,
   Info as InfoIcon,
 } from 'lucide-react';
+import { useGetRestaurantQuery } from '../../../api/customerApi';
 
 interface NavigationProps {
   onNavigate: (sectionId: string) => void;
@@ -31,6 +32,10 @@ const PremiumNavigation: React.FC<NavigationProps> = ({ onNavigate }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data: restaurant } = useGetRestaurantQuery();
+
+  // Extract only 'Nömrə Beer' from restaurant name (e.g., 'Nömrə Beer resto & pub' -> 'Nömrə Beer')
+  const displayName = restaurant?.name?.split(' resto')[0] || 'Nömrə Beer';
 
   // Scroll detection
   useEffect(() => {
@@ -135,7 +140,7 @@ const PremiumNavigation: React.FC<NavigationProps> = ({ onNavigate }) => {
                 },
               }}
             >
-              NextBeer
+              {displayName}
             </Typography>
           </Box>
 
